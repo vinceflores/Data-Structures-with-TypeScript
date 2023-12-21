@@ -1,0 +1,12 @@
+"use strict";
+// let message: string = 'Hello, New Stack!';
+// console.log(message);
+Object.defineProperty(exports, "__esModule", { value: true });
+var SinglyLinkedList_1 = require("./LinkedLIsts/SinglyLinkedList");
+var s = new SinglyLinkedList_1.default();
+s.add(1);
+s.add(2);
+s.print();
+console.log(s);
+console.log("s[0]", s.get(0));
+console.log("s[1]", s.get(1));
