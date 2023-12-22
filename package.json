@@ -4,7 +4,7 @@
   "description": "- Demonstrate proficiency in understanding Data Structures and Algorithms using a type safe language such as Typescript",
   "scripts": {
     "test": "jest",
-    "start": " tsc || node ./dist/index.js"
+    "start": " tsc || node ../dist/index.js"
   },
   "keywords": [
     "dataStructures"
