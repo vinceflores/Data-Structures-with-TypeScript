@@ -1,31 +1,31 @@
 class SNode<T> {
-  next: SNode<T> | null;
-  val!: T;
+  _next: SNode<T> | null;
+  _val!: T;
   constructor(val: T) {
-    this.next = null;
-    this.val = val;
+    this._next = null;
+    this._val = val;
   }
-  get Val() {
-    return this.val;
+  get val() {
+    return this._val;
   }
-  set Val(val: T) {
-    this.val = val;
+  set val(val: T) {
+    this._val = val;
   }
 
-  get Next(): SNode<T> | null {
-    return this.next;
+  get next(): SNode<T> | null {
+    return this._next;
   }
-  set Next(node: SNode<T>) {
-    this.next = node;
+  set next(next: SNode<T> | null) {
+    this._next = next;
   }
 }
 
 class SinglyLinkedList<E> {
   head: SNode<E> | null;
-  size: number;
+  _size: number;
   constructor() {
     this.head = null;
-    this.size = 0;
+    this._size = 0;
   }
   /**
    * Adds to the end of the list
@@ -41,27 +41,53 @@ class SinglyLinkedList<E> {
       }
       curr.next = new SNode<E>(val);
     }
-    this.size++;
+    this._size++;
   }
-  remove(val: E) {}
+  remove(val: E): E | null {
+    if (!this.head) return null;
+    let curr: SNode<E> | null = this.head;
+
+    // case 1: targetNode is head
+    if ((curr.val = val) && this._size == 1) {
+      const temp = curr.val;
+      // curr = curr.next;
+      this._size--;
+      return temp;
+    } 
+    else {
+      // case 2: targetNode is the tail
+      // case 3;  Node1-targetNode-Node2
+
+      let temp =curr.next?  curr.next.val : null;  
+      while (curr.next != null) {
+        if ((temp == val)) {
+          curr.next = curr.next.next;
+        } else {
+          curr = curr.next;
+        }
+      }
+      
+      this._size--;
+      return temp;
+    }
+  }
 
   print() {
-    if(!this.head) return; 
+    if (!this.head) return;
     console.log(this.head.val);
   }
   get(index: number): E | null {
-    if(index < 0) throw Error;
-    if(!this.head) return null;
+    if (index < 0) throw Error;
+    if (!this.head) return null;
     let curr: SNode<E> = this.head;
     let i: number = 0;
-    while (i < index && curr.next != null) {
+    while (i++ < index && curr.next != null) {
       curr = curr.next;
-      i++;
     }
     return curr.val;
   }
-  get Size() {
-    return this.size;
+  get size() {
+    return this._size;
   }
 }
 
