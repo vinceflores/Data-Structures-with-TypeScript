@@ -36,7 +36,7 @@ class SinglyLinkedList<E> {
       this.head = new SNode(val);
     } else {
       let curr: SNode<E> = this.head;
-      while (curr.next != null) {
+      while (curr.next !== null) {
         curr = curr.next;
       }
       curr.next = new SNode<E>(val);
@@ -48,25 +48,24 @@ class SinglyLinkedList<E> {
     let curr: SNode<E> | null = this.head;
 
     // case 1: targetNode is head
-    if ((curr.val = val) && this._size == 1) {
+    if (curr.val === val && this._size === 1) {
       const temp = curr.val;
-      // curr = curr.next;
+      this.head = this.head.next;
       this._size--;
       return temp;
-    } 
-    else {
+    } else {
       // case 2: targetNode is the tail
       // case 3;  Node1-targetNode-Node2
 
-      let temp =curr.next?  curr.next.val : null;  
-      while (curr.next != null) {
-        if ((temp == val)) {
+      let temp = curr.next ? curr.next.val : null;
+      while (curr.next !== null) {
+        if (temp === val) {
           curr.next = curr.next.next;
         } else {
           curr = curr.next;
         }
       }
-      
+
       this._size--;
       return temp;
     }
@@ -81,7 +80,7 @@ class SinglyLinkedList<E> {
     if (!this.head) return null;
     let curr: SNode<E> = this.head;
     let i: number = 0;
-    while (i++ < index && curr.next != null) {
+    while (i++ < index && curr.next !== null) {
       curr = curr.next;
     }
     return curr.val;
