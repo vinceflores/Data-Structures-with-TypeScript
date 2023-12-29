@@ -36,7 +36,7 @@ describe("testing remove():", () => {
     s.add(2);
     s.add(3);
     expect(s.size).toBe(3);
-    expect(s.remove(2)).toBe(2);  
+    expect(s.remove(2)).toBe(2);
     expect(s.size).toBe(2);
   });
 });

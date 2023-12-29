@@ -1,55 +1,37 @@
 class DNode<T> {
-  private _next: DNode<T> | null;
-  private _prev: DNode<T> | null;
-  private _val: T;
+  next: DNode<T> | null;
+  prev: DNode<T> | null;
+  val!: T | null;
 
   constructor() {
-    this._next = null;
-    this._prev = null;
-  }
-
-  set next(next: DNode<T>) {
-    this._next = next;
-  }
-
-  get next(): DNode<T> | null {
-    return this._next;
-  }
-
-  set prev(prev: DNode<T>) {
-    this._prev = prev;
-  }
-
-  get prev(): DNode<T> | null {
-    return this._prev;
-  }
-
-  set val(val: T) {
-    this._val = val;
-  }
-  get val() {
-    return this._val;
+    this.next = null;
+    this.prev = null;
   }
 }
 
 class DoublyLinkedLIst<T> {
-  private _header: DNode<T> | null;
+  private head: DNode<T>;
   private _size: number;
-  private _tailer: DNode<T> | null;
+  private tail: DNode<T>;
 
   constructor() {
-    this._header = new DNode<T>();
-    this._tailer = this._header;
+    this.head = new DNode<T>();
+    this.tail = this.head;
     this._size = 0;
   }
-  //TODO
-  add(value: T) {
+  add(val: T) {
     if (this._size === 0) {
+      this.head.val = val;
     } else {
+      let temp: DNode<T> = new DNode<T>();
+      temp.val = val;
+      this.tail.next = temp;
+      temp.prev = this.tail;
+      this.tail = temp;
     }
     this._size++;
   }
-  //TODO
+
   insert(index: number, value: T) {
     if (this._size === 0) {
     } else {
@@ -58,18 +40,86 @@ class DoublyLinkedLIst<T> {
     }
     this._size++;
   }
-  //TODO
+
   set(index: number, value: T) {
     // find the index
+    let temp: DNode<T> = this.head;
+    while (index > 0) {
+      temp = temp.next!;
+      index--;
+    }
     // set the value
+    temp.val = value;
   }
-  //TODO
-  get(index: number) {}
-  //TODO
-  remove(value: T) {}
+  find(index: number) {
+    let temp: DNode<T> = this.head;
+    while (index > 0) {
+      temp = temp.next!;
+      index--;
+    }
+    return temp.val;
+  }
+
+  findValue(val: T) {
+    let temp: DNode<T> | null = this.head;
+    if (this.head === null) return false;
+    else {
+      while (temp.next !== null) {
+        if (temp.next.val === val) {
+          return true;
+        } else {
+          temp = temp?.next;
+        }
+      }
+      return false;
+    }
+  }
+
+  findMiddle(): DNode<T> | null {
+    let slow: DNode<T> | null = this.head;
+    let fast: DNode<T> | null = this.head;
+
+    while (fast !== null && fast.next !== null) {
+      fast.next = fast.next.next;
+      slow.next = slow.next;
+    }
+    return slow.next;
+  }
+
+  remove(value: T) {
+    let temp: DNode<T> | null = this.head;
+    if (temp === null) return;
+    else {
+      if (temp.val === value) {
+        this.head = new DNode<T>();
+        this.tail = this.head;
+        this._size = 0;
+      } else {
+        while (temp.next !== null) {
+          if (temp.next.val === value) {
+            if (temp.next.next !== null) [(temp.next.next.prev = temp)];
+            temp.next = temp.next.next;
+            this._size--;
+          } else {
+            temp = temp?.next;
+          }
+        }
+      }
+    }
+  }
 
   get size() {
     return this._size;
+  }
+
+  print() {
+    let temp: DNode<T> = this.head;
+    let str: string = "<=>";
+    for (let i = 0; i < this._size; i++) {
+      str += temp.val + "<=>";
+      temp = temp.next!;
+    }
+    console.log(str);
   }
 }
 
