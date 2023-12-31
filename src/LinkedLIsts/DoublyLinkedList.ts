@@ -119,7 +119,6 @@ class DoublyLinkedLIst<T> {
       str += temp.val + "<=>";
       temp = temp.next!;
     }
-    console.log(str);
   }
 }
 

@@ -1,4 +1,4 @@
-class SNode<T> {
+export class SNode<T> {
   _next: SNode<T> | null;
   _val!: T;
   constructor(val: T) {
@@ -43,6 +43,19 @@ class SinglyLinkedList<E> {
     }
     this._size++;
   }
+
+  insertFront(val: E): void {
+    let temp: SNode<E> = new SNode<E>(val);
+    temp.next = this.head;
+    this.head = temp;
+    this._size++;
+  }
+
+  findMiddle(){
+    if(!this.head) return; 
+    
+  }
+
   remove(val: E): E | null {
     if (!this.head) return null;
     let curr: SNode<E> | null = this.head;
@@ -73,8 +86,27 @@ class SinglyLinkedList<E> {
 
   print() {
     if (!this.head) return;
-    console.log(this.head.val);
+    let curr: SNode<E> = this.head;
+    let s: string = "->";
+    while (curr.next !== null) {
+      s += curr.val + "->";
+      curr = curr.next;
+    }
+    console.log(s)
   }
+
+  toString() {
+    if (!this.head) return;
+    let curr: SNode<E> = this.head;
+    let s: string = "->";
+    while (curr.next !== null) {
+      s += curr.val + "->";
+      curr = curr.next;
+    }
+    s += curr.val + "->"
+    return s 
+  }
+
   get(index: number): E | null {
     if (index < 0) throw Error;
     if (!this.head) return null;
