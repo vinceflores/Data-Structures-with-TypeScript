@@ -18,7 +18,7 @@ describe("reverse test", () => {
   test("reverse size 2", () => {
     list.add("one");
     list.add("two");
-    let r = "->two->one->"
+    let r = "->two->one->";
     expect(list.size).toBe(2);
     expect(algo.reverse(list)?.toString()).toBe(r);
   });
@@ -26,12 +26,8 @@ describe("reverse test", () => {
     list.add("one");
     list.add("two");
     list.add("three");
-    let r = "->three->two->one->"
+    let r = "->three->two->one->";
     expect(list.size).toBe(3);
     expect(algo.reverse(list)?.toString()).toBe(r);
   });
 });
-
-describe("sart -> mergesort", () => {
-    
-})
